@@ -3,6 +3,7 @@ package ua.denk.resttest.controllers;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.denk.resttest.model.Person;
 import ua.denk.resttest.model.Views;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/api")
 public class PersonController {
 
     @Autowired
@@ -22,7 +24,7 @@ public class PersonController {
     private  PersonService personService;
 
 
-    @GetMapping("/get-person")
+    @GetMapping("/person")
     @JsonView(Views.IdName.class)
     public Person getPersonById(@RequestParam Long id) {
         Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);

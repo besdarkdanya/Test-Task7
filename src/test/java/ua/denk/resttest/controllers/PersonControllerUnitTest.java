@@ -41,7 +41,7 @@ class PersonControllerUnitTest {
                 .thenReturn(
                         Optional.of(new Person(1L, "danyl", "denk", LocalDate.parse("2001-06-20"))));
 
-        mvc.perform(get("/get-person?id=1")
+        mvc.perform(get("/api/person?id=1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
@@ -51,7 +51,7 @@ class PersonControllerUnitTest {
 
     @Test
     void whenExceptionThrown_thenAssertionSucceeds() throws Exception {
-        mvc.perform(get("/get-person?id=10")
+        mvc.perform(get("/api/person?id=1000")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof PersonNotFoundException))
